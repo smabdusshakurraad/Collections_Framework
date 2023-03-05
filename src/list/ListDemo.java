@@ -23,5 +23,17 @@ public class ListDemo {
         System.out.println(list.lastIndexOf("a"));
 
         System.out.println(list.subList(0,2));
+
+        List<Customer> customers = new ArrayList<>();
+        customers.add(new Customer("b","e3"));
+        customers.add(new Customer("a","e2"));
+        customers.add(new Customer("c", "e1"));
+        System.out.println(customers);
+
+        Collections.sort(customers);
+        System.out.println(customers);
+
+        customers.sort(new EmailCustomerComparator()); // similar to Collections.sort(customers, new EmailCustomerComparator());
+        System.out.println(customers);
     }
 }
