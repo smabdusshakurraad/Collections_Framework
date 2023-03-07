@@ -32,7 +32,7 @@ public class MapDemo {
             System.out.println(entry.getValue());
             System.out.println(entry.getKey());
         }
-
+        // values
         for( var customer : map.values()){
             System.out.println(customer);
         }
