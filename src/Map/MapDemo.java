@@ -2,8 +2,11 @@ package Map;
 
 import list.Customer;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toSet;
 
 public class MapDemo {
     public static void show(){
@@ -36,5 +39,32 @@ public class MapDemo {
         for( var customer : map.values()){
             System.out.println(customer);
         }
+
+        // Flight schedule problem understanding
+        List<Customer> customers = Arrays.asList(new Customer("A", "E"),
+                new Customer("A", "B"), new Customer("A", "C"), new Customer("B", "E"),
+                new Customer("B", "D"), new Customer("B", "F"), new Customer("C", "B"));
+
+        Set<String> customerNameSet = customers.stream().map(Customer::getName).collect(toSet());
+        Map<String, Set<String>> customerNameMap = customers.stream().collect(groupingBy(Customer::getName,
+                Collectors.mapping(Customer::getEmail, Collectors.toSet())));
+
+        List<Customer> customersExtra = Arrays.asList(new Customer("A", "E"),
+                new Customer("A", "B"), new Customer("A", null), new Customer("B", "E"),
+                new Customer("B", "D"), new Customer("C", "B"));
+        Map<String, Set<String>> customerExtraMap = customersExtra.stream()
+                .collect(groupingBy(Customer::getName, Collectors.mapping(Customer::getEmail, toSet())));
+
+        for (String name: customerNameSet) {
+            customerNameMap.get(name).removeAll(customerExtraMap.get(name));
+        }
+        System.out.println(customerNameSet);
+        for (String key: customerNameMap.keySet()) {
+            System.out.println(customerNameMap.get(key));
+            if(customerNameMap.get(key).size() > 0){
+                customerNameSet.remove(key);
+            }
+        }
+        System.out.println(customerNameSet);
     }
 }

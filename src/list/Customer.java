@@ -7,7 +7,9 @@ public class Customer implements Comparable<Customer>{
     public String getEmail() {
         return email;
     }
-
+    public String getName(){
+        return name;
+    }
     public Customer(String name, String email) {
         this.name = name;
         this.email = email;

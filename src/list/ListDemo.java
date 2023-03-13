@@ -2,6 +2,7 @@ package list;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class ListDemo {
@@ -34,6 +35,9 @@ public class ListDemo {
         System.out.println(customers);
 
         customers.sort(new EmailCustomerComparator()); // similar to Collections.sort(customers, new EmailCustomerComparator());
+        System.out.println(customers);
+
+        customers.sort(Comparator.comparing(Customer::getEmail));
         System.out.println(customers);
     }
 }
